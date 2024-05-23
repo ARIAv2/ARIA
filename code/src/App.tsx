@@ -1,4 +1,4 @@
-import { useState, useCallback } from "react";
+import { useState, useCallback, useEffect } from "react";
 import "./App.css";
 
 function App() {
@@ -9,6 +9,9 @@ function App() {
       .then((data) => setFact(data.fact))
       .catch(() => setFact("Failed to load fact!"));
   }, [setFact]);
+  useEffect(() => {
+    fetchFact();
+  }, []);
   return <div>{fact}</div>;
 }
 
