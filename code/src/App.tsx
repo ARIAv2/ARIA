@@ -12,7 +12,7 @@ function App() {
   useEffect(() => {
     fetchFact();
   }, []);
-  return <div>{fact}</div>;
+  return <div>Fact: {fact}</div>;
 }
 
 export default App;
