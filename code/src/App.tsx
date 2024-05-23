@@ -1,8 +1,15 @@
-import { useState } from "react";
+import { useState, useCallback } from "react";
 import "./App.css";
 
 function App() {
-  return <></>;
+  const [fact, setFact] = useState<string>("Loading...");
+  const fetchFact: () => void = useCallback(() => {
+    fetch("https://ariabackend.onrender.com/")
+      .then((res) => res.json())
+      .then((data) => setFact(data.fact))
+      .catch(() => setFact("Failed to load fact!"));
+  }, [setFact]);
+  return <div>{fact}</div>;
 }
 
 export default App;
