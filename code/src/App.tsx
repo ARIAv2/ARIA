@@ -1,18 +1,27 @@
-import { useState, useCallback, useEffect } from "react";
 import "./App.css";
 
 function App() {
-  const [fact, setFact] = useState<string>("Loading...");
-  const fetchFact: () => void = useCallback(() => {
-    fetch("https://ariabackend.onrender.com/")
-      .then((res) => res.json())
-      .then((data) => setFact(data.fact))
-      .catch(() => setFact("Failed to load fact!"));
-  }, [setFact]);
-  useEffect(() => {
-    fetchFact();
-  }, []);
-  return <div>Fact: {fact}</div>;
+  // Make sure to replace the URL with your actual backend URL if different
+  const backendUrl = "http://localhost:3001";
+
+  const fetchData = () =>
+    fetch(backendUrl)
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Network response was not ok " + response.statusText);
+        }
+        return response.text(); // or response.json() if the backend sends JSON
+      })
+      .then((data) => {
+        console.log(data); // Handle the response data
+      })
+      .catch((error) => {
+        console.error(
+          "There has been a problem with your fetch operation:",
+          error
+        );
+      });
+  return <div onClick={fetchData}>blah</div>;
 }
 
 export default App;
