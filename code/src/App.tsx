@@ -2,7 +2,7 @@ import "./App.css";
 
 function App() {
   // Make sure to replace the URL with your actual backend URL if different
-  const backendUrl = "https://ariabackend.onrender.com/";
+  const backendUrl = "https://ariabackend.onrender.com";
 
   const fetchData = () =>
     fetch(backendUrl)
@@ -10,10 +10,10 @@ function App() {
         if (!response.ok) {
           throw new Error("Network response was not ok " + response.statusText);
         }
-        return response.text(); // or response.json() if the backend sends JSON
+        return response.text();
       })
       .then((data) => {
-        console.log(data); // Handle the response data
+        console.log(data);
       })
       .catch((error) => {
         console.error(
@@ -21,7 +21,27 @@ function App() {
           error
         );
       });
-  return <div onClick={fetchData}>blah</div>;
+  const postData = () => {
+    fetch(backendUrl, {
+      method: "POST",
+      body: JSON.stringify({
+        Key: "Value",
+      }),
+      headers: {
+        "Content-type": "text/plain",
+      },
+    })
+      .then((response) => {
+        return response.text();
+      })
+      .then((data) => console.log(data));
+  };
+  return (
+    <>
+      <div onClick={fetchData}>get</div>
+      <div onClick={postData}>post</div>
+    </>
+  );
 }
 
 export default App;
