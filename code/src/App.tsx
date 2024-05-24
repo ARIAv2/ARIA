@@ -2,7 +2,7 @@ import "./App.css";
 
 function App() {
   // Make sure to replace the URL with your actual backend URL if different
-  const backendUrl = "http://localhost:3001";
+  const backendUrl = "https://ariabackend.onrender.com/";
 
   const fetchData = () =>
     fetch(backendUrl)
